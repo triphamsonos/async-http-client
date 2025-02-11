@@ -126,6 +126,11 @@ extension TLSConfiguration {
             }
         }
 
+        if #available(iOS 12.0, tvOS 13.0, watchOS 6.0, *) {
+            sec_protocol_options_set_tls_resumption_enabled(options.securityProtocolOptions, true)
+            sec_protocol_options_set_tls_tickets_enabled(options.securityProtocolOptions, true)
+        }
+
         // application protocols
         for applicationProtocol in self.applicationProtocols {
             applicationProtocol.withCString { buffer in
